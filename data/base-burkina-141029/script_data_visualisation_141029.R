@@ -22,6 +22,7 @@ YAKO.data<-zoo(menin["cas"][[1]]["YAKO"][[1]])        # data for YAKO district
 
 
 vtime=time(SEGUENEGA.data) # extracting time vector (as date)
+test=date(SEGUENEGA.data[1,1:471])
 
 SEGUENEGA.data[c(1:10),c(1:10)] # view only ten first health centers data
 
@@ -40,4 +41,28 @@ xyplot(DANDE.data[,c(10:20)]) # plotting data for the first 10 health centers
 
 plot(vtime,SEGUENEGA.data[,2],type="l",lwd=2,col="blue")
 
+# plotting data for csps kalsaka health center (2006)
 
+#pdf(file="plots/data_csps_kalsaka.pdf", width=8, height=8, 
+    #title="Data visualisation at health center levels")
+
+plot(vtime[vtime>="2006-01-02"&vtime<="2006-12-29"],SEGUENEGA.data[,9][vtime>="2006-01-02"&vtime<="2006-12-29"]
+     ,pch=16,type="b", xlab="Time (Weeks)", ylab="Weekly numbers of suspected cases", 
+     main="Meningitis cases reporting in CSPS Kalsaka \n (Burkina-Faso) - 2006")
+
+
+## Incidence.
+
+SEGUENEGA.incid<-zoo(menin["incidence"][[1]]["SEGUENEGA"][[1]])   # data for SEGUENEGA district
+
+# Now with 2 graphs
+pdf(file='plots/segunega.pdf',title="Data visualisation at health center levels")
+
+xyplot(SEGUENEGA.data[,9], ylab="Weekly numbers of suspected cases",title="Data visualisation at health center levels\n seguenega")
+
+plot(vtime[vtime>="2006-01-02"&vtime<="2006-12-29"],SEGUENEGA.data[,9][vtime>="2006-01-02"&vtime<="2006-12-29"]
+     ,pch=16,type="b", xlab="Time (Weeks)", ylab="Weekly numbers of suspected cases", 
+     main="Meningitis cases reporting in CSPS Kalsaka \n (Burkina-Faso) - 2006")
+
+
+dev.off()

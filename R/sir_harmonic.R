@@ -56,7 +56,7 @@ SIRfunc_harmonic=function(t
 # Let's set up some initial conditions at time t=0
 ##################################################################################
 npop = 10000000  # the population size
-I_0 = 1          # put one infected person in the population
+I_0 = 1         # put one infected person in the population
 S_0 = npop-I_0
 R_0 = 0          # assume that initially no one has recovered yet
 
@@ -73,7 +73,8 @@ ymax = 0.12           # The maximum prevalence, used when plotting... change thi
                       # curves don't fit in the plotting area when you change the model parameters
 legend = character(0) # We are going to fill this with labels for the plot legend
 
-vt0 = c(10,60,90)     # try three different times-of-introduction
+#vt0 = c(10,60,90)     # try three different times-of-introduction
+vt0 = seq(-180,180,5)     # try three different times-of-introduction
 
 for (it0 in 1:length(vt0)){
    vt = seq(vt0[it0],400,1) # the epidemic begins at time t0
