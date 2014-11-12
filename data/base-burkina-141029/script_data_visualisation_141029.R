@@ -118,8 +118,8 @@ dev.off()
 par(mar=c(2,5,2,5))
 
 
-plot(vtime[vtime>="2006-01-02"&vtime<="2006-12-29"],SEGUENEGA.incid[,9][vtime>="2006-01-02"&vtime<="2006-12-29"]
-     ,pch=16,type="b", xlab="Time (Weeks)", ylab="Weekly numbers of suspected cases", 
+plot(vtime[vtime>="2006-01-02"&vtime<="2006-12-29"],SEGUENEGA.incid[,9][vtime>="2006-01-02"&vtime<="2006-12-29"]*1e+05
+     ,pch=16,type="b", xlab="Time (Weeks)", ylab="Weekly incidence of suspected cases/100,000", 
      main="Meningitis cases reporting in CSPS Kalsaka \n (Burkina-Faso) - 2006")
 
 
@@ -138,3 +138,20 @@ plot(vtime[vtime>="2006-01-02"&vtime<="2006-12-29"],SEGUENEGA.incid[,9][vtime>="
 
 
 dev.off()
+
+
+####================================================
+
+# Ce 11/11/2014 calcul des indicateurs pour le district de Hounde
+
+hounde.incid.data<-coredata(HOUNDA.incid) # Generic functions for extracting only the matrix of observations from the full time series.
+as.vector(cbind(data.frame(hounde.incid.data)[1][,"csps.bassé"]))
+
+sample=data.frame(hounde.incid.data)
+
+###=============
+
+
+pdf(file='plots/hounde.pdf',title="Data visualisation at health center levels")
+xyplot(HOUNDA.incid[,c(1:27)][vtime>="2006-01-02"&vtime<="2006-12-29"]*1e+05, pch=16,type="b",ylim=c(0,350),main="HOUNDA District health centers n=27",sub="HOUNDA District health centers",layout=c(4,7))
+xyplot(HOUNDA.incid[,c(21:27)][vtime>="2006-01-02"&vtime<="2006-12-29"]*1e+05, pch=16,type="b",ylim=c(0,250),main="HOUNDA District health centers n=27",sub="HOUNDA District health centers",layout=c(4,2))
