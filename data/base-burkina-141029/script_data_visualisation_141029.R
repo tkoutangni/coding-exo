@@ -2,6 +2,8 @@
 install.packages("zoo")
 install.packages("lubridate") # for extracting date, month, week from time series
 install.packages("lattice")
+install.packages("latticeExtra")
+library(latticeExtra)
 require("lattice")
 require("zoo")
 require(lubridate)
@@ -141,8 +143,15 @@ incid_plot<-function(x, main="", ylim=NULL, sub=""){
     xyplot(x*1e+05, 
            pch=16,type="b",ylim=ylim,main=main,cex=.7,
            sub=sub,layout=c(3,3),
+           #group = c(group1,group2), col=c("red","blue"),
            panel = function( x,y,...) {
                panel.abline( h=75, lty = "dotted", col = "black")
+               panel.abline( v=vtime[month(vtime)==11&year(vtime)==2006][1],lty = "solid", col = "blue")
+               panel.abline( v=vtime[month(vtime)==5&year(vtime)==2006][5],lty = "dotted", col = "blue")
+               
+               #panel.rect(xleft=week(vtime[month(vtime)==11&year(vtime)==2006][[1]]), xright=week(vtime[month(vtime)==5&year(vtime)==2006][[5]]),ybottom=0, ytop=300,col="grey")
+               #layer_(panel.xblocks(vtime, vtime[month(vtime)>=11 | month(vtime)<=5], col = "lightgrey"))
+               
                panel.xyplot( x,y,...)
            })   
 } 
