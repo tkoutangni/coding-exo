@@ -145,9 +145,20 @@ incid_plot<-function(x, main="", ylim=NULL, sub=""){
            sub=sub,layout=c(3,3),
            #group = c(group1,group2), col=c("red","blue"),
            panel = function( x,y,...) {
+               start_dry=vtime[month(vtime)==11&year(vtime)==2006][1]
+               end_dry=vtime[month(vtime)==5&year(vtime)==2006][5]
+               
+               start_harmattan=vtime[month(vtime)==11&year(vtime)==2006][1]
+               end_harmattan=vtime[month(vtime)==2&year(vtime)==2006][4]
+               panel.rect(xleft=as.numeric(start_dry), xright=as.numeric(end_dry),ybottom=0, ytop=400,col="lightgrey",border = "transparent")
+               panel.rect(xleft=as.numeric(end_dry), xright=as.numeric(end_harmattan),ybottom=0, ytop=400,col="lightblue",border = "transparent")
                panel.abline( h=75, lty = "dotted", col = "black")
-               panel.abline( v=vtime[month(vtime)==11&year(vtime)==2006][1],lty = "solid", col = "blue")
-               panel.abline( v=vtime[month(vtime)==5&year(vtime)==2006][5],lty = "dotted", col = "blue")
+               
+               #panel.abline( v=start_dry,lty = "solid", col = "blue")
+               #panel.abline( v=end_dry,lty = "dotted", col = "blue")
+               #layer_(panel.xblocks(as.numeric(vtime), as.numeric(vtime) <= as.numeric(end_harmattan), col = "green"))
+               
+               
                
                #panel.rect(xleft=week(vtime[month(vtime)==11&year(vtime)==2006][[1]]), xright=week(vtime[month(vtime)==5&year(vtime)==2006][[5]]),ybottom=0, ytop=300,col="grey")
                #layer_(panel.xblocks(vtime, vtime[month(vtime)>=11 | month(vtime)<=5], col = "lightgrey"))
@@ -240,7 +251,7 @@ incid_plot(
 # dry season only in epidemic year 2006
 
 incid_plot(
-    HOUNDA.incid[,fe_fs_houde.index][yearmon(as.yearmon(vtime))>="janv. 2006"&yearmon(as.yearmon(vtime))<="mai 2006"], 
+    HOUNDA.incid[,fe_fs_houde.index][yearmon(as.yearmon(vtime))>="janv. 2006"&yearmon(as.yearmon(vtime))<="mai 2007"], 
     main=main.hounde,
     sub=sub.hounde,
     ylim=c(0,350)
