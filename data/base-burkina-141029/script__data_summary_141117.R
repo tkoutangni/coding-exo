@@ -21,17 +21,24 @@ subset.houde<-as.data.frame( # subseting data data base using a time window
 
 ## Dry season (all): November - May
 ## Dry season harmattan: November - February
-## Dry season hot (T>=40°C): March - Mai
-
+## Dry season hot (T>=40°C): March - May
 ## Wet / rainy season: June - October
 #-------------------------------------------
+install.packages("hydroTSM")
+
+
 # Hounde district
-v_month<-month(time(HOUNDA.incid))
-HOUNDA.incid$season<-zoo(HOUNDA.incid$season==0)
+v_month<-zoo(month(time(HOUNDA.incid)))
+HOUNDA.incid$season=zoo(HOUNDA.incid$season=0)
 HOUNDA.incid$season[which(v_month==11 | v_month==12 | v_month==1 | v_month==2)]<-HOUNDA.incid$season=="dry harmattan"
 HOUNDA.incid$season[which(v_month==3 | v_month==4 | v_month==5)]<-"dry hot"
 HOUNDA.incid$season[which(v_month==6 | v_month==7 | v_month==8 | v_month==9 | v_month==10)]<-"rainy"
 
+HOUNDA.incid$season[which(v_month==11 | v_month==12 | v_month==1 | v_month==2)]<-1
+HOUNDA.incid$season<-zoo(HOUNDA.incid$season[which(v_month==11 | v_month==12 | v_month==1 | v_month==2)]==1)
+
+HOUNDA.incid$season[v_month==11 | v_month==12 | v_month==1 | v_month==2,HOUNDA.incid$season]<-"dry"
+HOUNDA.incid$season[v_month==3 | v_month==4 | v_month==5,HOUNDA.incid$season]<-2
 
 xyplot(HOUNDA.incid[which(HOUNDA.incid[,28]=="dry harmattan"),fe_fs_houde.index])
 xyplot(HOUNDA.incid)
