@@ -1,30 +1,7 @@
-District de Houndé:
+Formation sanitaires ayant connu un foyer ?pid?mique FE selon la definition de Haoua tall ( Papier sur la d?finition et la caract?risation
+des foyers ?pid?miques.
 
-Formation sanitaires ayant connu un foyer épidémique FE selon la definition de Haoua tall ( Papier sur la définition et la caractérisation
-des foyers épidémiques.
-
-A weekly incid of 75 per 100,000 pop during at least 2 consécutive weeks with at least 5 cases per week. 
-
-
-According to such definition, 
-
-Heath center with localized épidemics are.
-
-per year
-
-2004-2005 no epidemic
-
-2006 : epidemic in: 
-
--csps bassé
--csps bohokari
--csps bouahoun
--csps bouéré
--csps dougoumanto ii
--csps fafo
--csps gombélédougou
--csps koumbia
--csps sara
+A weekly incid of 75 per 100,000 pop during at least 2 cons?cutive weeks with at least 5 cases per week. 
 
 
 
@@ -34,12 +11,3 @@ per year
 
 
 
-[1] "csps bassé"          "csps békuy"          "csps béréba"        
- [4] "csps bohokari"       "csps bouni"          "csps bouahoun"      
- [7] "csps bouéré"         "csps dahoun"         "csps dougoumanto ii"
-[10] "csps fafo"           "csps founzan"        "csps gombélédougou" 
-[13] "csps indini"         "csps karaba"         "csps kari"          
-[16] "csps kiéré"          "csps koti"           "nra kouloho"        
-[19] "csps koumbia"        "csps kovio"          "csps maro"          
-[22] "csps nahi"           "csps wakuy"          "csps pê"            
-[25] "csps sara"           "csps sebedougou"     "csps urbain"   

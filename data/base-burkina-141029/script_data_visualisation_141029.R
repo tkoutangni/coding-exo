@@ -11,7 +11,7 @@ require(lubridate)
 
 #==========Loading "zoo" formatted time series==========
 
-load("data/base-burkina-141029/141029_meningite.RData")
+load("coding-exo/data/base-burkina-141029/141029_meningite.RData")
 
 names(menin["incidence"][[1]]) # getting the district names in the list "cas" of menin list
 
@@ -128,14 +128,6 @@ dev.off()
 
 ###fonction générique pourextraire le coredata (observation) de la serie temporelle====
 
-# Ce 11/11/2014 calcul des indicateurs pour le district de Hounde
-
-hounde.incid.data<-coredata(HOUNDA.incid) # Generic functions for extracting only the matrix of observations from the full time series.
-as.vector(cbind(data.frame(hounde.incid.data)[1][,"csps.bassé"]))
-
-sample=data.frame(hounde.incid.data) 
-
-
 ###===============
 
 #plotting function
@@ -145,13 +137,13 @@ incid_plot<-function(x, main="", ylim=NULL, sub=""){
            sub=sub,layout=c(3,3),
            #group = c(group1,group2), col=c("red","blue"),
            panel = function( x,y,...) {
-               start_dry=vtime[month(vtime)==11&year(vtime)==2006][1]
-               end_dry=vtime[month(vtime)==5&year(vtime)==2006][5]
+               #start_dry=vtime[month(vtime)==11&year(vtime)==2006][1]
+               #end_dry=vtime[month(vtime)==5&year(vtime)==2006][5]
                
-               start_harmattan=vtime[month(vtime)==11&year(vtime)==2006][1]
-               end_harmattan=vtime[month(vtime)==2&year(vtime)==2006][4]
-               panel.rect(xleft=as.numeric(start_dry), xright=as.numeric(end_dry),ybottom=0, ytop=400,col="lightgrey",border = "transparent")
-               panel.rect(xleft=as.numeric(end_dry), xright=as.numeric(end_harmattan),ybottom=0, ytop=400,col="lightblue",border = "transparent")
+               #start_harmattan=vtime[month(vtime)==11&year(vtime)==2006][1]
+               #end_harmattan=vtime[month(vtime)==2&year(vtime)==2006][4]
+               #panel.rect(xleft=as.numeric(start_dry), xright=as.numeric(end_dry),ybottom=0, ytop=400,col="lightgrey",border = "transparent")
+               #panel.rect(xleft=as.numeric(end_dry), xright=as.numeric(end_harmattan),ybottom=0, ytop=400,col="lightblue",border = "transparent")
                panel.abline( h=75, lty = "dotted", col = "black")
                
                #panel.abline( v=start_dry,lty = "solid", col = "blue")
@@ -167,102 +159,209 @@ incid_plot<-function(x, main="", ylim=NULL, sub=""){
            })   
 } 
 
-# defining graphical parameters for hounde district.
+# defining graphical parameters of the districts.
 
-main.hounde<-as.character("Weekly incidence/100,000 \n Sanitary District of Houndé (Burkina-Faso) \n Dotted line represent treshold for outbreak")
-sub.hounde<-as.character("Data represented by health centers")
-
-pdf(file='plots/hounde.pdf',width=15,height=10)
-
-incid_plot(
-        HOUNDA.incid[,c(1:27)][year(vtime)<=2006], 
-        main=main.hounde,
-        sub=sub.hounde,
-        ylim=c(0,350)
+main.title<-function(district.name="------"){ #  argument must be of character class
+  titre=paste(
+        "Weekly incidence/100,000 \n Sanitary District of",
+        district.name, "(Burkina-Faso) \n Dotted line represent treshold for outbreak"
         )
+  titre
+}
 
-incid_plot(
-    HOUNDA.incid[,c(1:27)][year(vtime)>2006&year(vtime)<=2011], 
-    main=main.hounde,
-    sub=sub.hounde,
-    ylim=c(0,350)
+sub.title<-function(district.name="------"){ #  argument must be of character class
+    titre=paste(
+        "Health Centers in the sanitary District of",
+        district.name, "(Burkina-Faso)"
     )
+    titre
+}
 
-incid_plot(
-    HOUNDA.incid[,c(1:27)][year(vtime)==2012], 
-    main=main.hounde,
-    sub=sub.hounde,
-    ylim=c(0,350)
-    )
+#===================================================
+# selection formations sanitaires ayant connu ou pas des foyer par district
+#===================================================
 
-dev.off()
-
-# Plotting all years for hounde district hs.
-
-pdf(file='plots/hounde_2004_2012_all.pdf',width=15,height=10)
-
-incid_plot(
-    HOUNDA.incid[,c(1:27)][year(vtime)>=2004], 
-    main=main.hounde,
-    sub=sub.hounde,
-    ylim=c(0,350))
-
-dev.off()
-
-fe_fs_houde<-c(
+# District Houndé
+fe_fs_houde<-c(   # foyers épidémiques.
     "csps bassé",
     "csps bohokari",
-    "bouahoun",
+    "csps bouahoun",
     "csps bouéré",
     "csps dougoumanto ii",
     "csps fafo",
-    "csps gombélédougou",
     "csps koumbia",
     "csps sara"
     )
 
-fe_fs_houde.index<-c(
-    1,4,6,7,9,10,12,19,25
+fe_fs_houde.index<-which(
+    names(HOUNDA.incid)%in%fe_fs_houde
+    ) # index formation sanitaires avec foyers épidémiques
+
+non_fs_houde<-setdiff( # subsetting names of H.S without outbreak.
+    names(HOUNDA.incid),
+    fe_fs_houde
+    )
+non_fe_fs_houde.index<-which(
+    names(HOUNDA.incid)%in%non_fs_houde
+    ) # Formation sanitaires sans foyers épidémiques.
+
+#===================================
+
+# District LENA
+fe_fs_lena<-c(
+    "csps dorossiamasso",
+    "csps fina",
+    "csps kofila",
+    "csps lena",
+    "csps satiri" 
     )
 
-# ploting only health center which experience epidemic at least once 
+fe_fs_lena.index<-which(
+    names(ts.Lena.complete)%in%fe_fs_lena
+    )
 
-pdf(file='plots/fe_fs_houde_2004_2012.pdf',width=15,height=10)
+non_fs_lena<-setdiff(
+    names(ts.Lena.complete),
+    fe_fs_lena
+)
+
+non_fe_fs_lena.index<-which(
+    names(ts.Lena.complete)%in%non_fs_lena
+    )
+
+#===================================
+# District K.vigue
+
+fe_fs_k.vigue<-c(
+    "csps k. vigue",
+    "csps soumousso"
+    )
+fe_fs_k.vigue.index<-which(
+    names(ts.k.vigue.complete)%in%fe_fs_k.vigue
+    )
+
+non_fe_fs_k.vigue<-setdiff(
+    names(ts.k.vigue.complete),
+    fe_fs_k.vigue
+    )
+
+non_fe_fs_k.vigue.index<-which(
+    names(ts.k.vigue.complete)%in%non_fe_fs_k.vigue
+    )
+
+#===================================
+# District Seguenega
+
+fe_fs_seguenega<-c(
+    "csps goubré",
+    "csps goungré",
+    "csps irim",
+    "csps kalsaka",
+    "csps kondé tangaye",
+    "csps ramsa",
+    "csps pourra",
+    "csps rambo"
+)
+
+fe_fs_seguenega.index<-which(
+    names(SEGUENEGA.incid)%in%fe_fs_seguenega
+)
+
+non_fe_fs_seguenega<-setdiff(
+    names(SEGUENEGA.incid),
+    fe_fs_seguenega
+)
+
+non_fe_fs_seguenega.index<-which(
+    names(SEGUENEGA.incid)%in%non_fe_fs_seguenega
+)
+
+##======================================================
+# Plotting weekly health center level incidence data for each district.
+========================================================
+
+## HOUNDE DISTRICT
+
+# ploting separately health centers-years with or without at leat one outbreak 
+
+pdf(file='plots/fe_et_non_fe_houde_2004_2012.pdf',width=15,height=10)
 
 incid_plot(
     HOUNDA.incid[,fe_fs_houde.index][year(vtime)>=2004], 
-    main=main.hounde,
-    sub=sub.hounde,
+    main=main.title("Houndé"),
+    sub="Health centers which experienced an outbreak",
+    ylim=c(0,350))
+
+incid_plot(
+    HOUNDA.incid[,non_fe_fs_houde.index][year(vtime)>=2004], 
+    main=main.title("Houndé"),
+    sub="Health centers which experienced no outbreak",
     ylim=c(0,350))
 
 dev.off()
 
 #===
 
-pdf(file='plots/fe_fs_houde_2006.pdf',width=15,height=10)
+## LENA
+
+pdf(file='plots/fe_et_non_fe_lena_2004_2012.pdf',width=15,height=10)
 
 incid_plot(
-    HOUNDA.incid[,fe_fs_houde.index][year(vtime)==2006], 
-    main=main.hounde,
-    sub=sub.hounde,
-    ylim=c(0,350)
-    )
+    ts.Lena.complete[,fe_fs_lena.index][year(vtime)>=2004], 
+    main=main.title("Lena"),
+    sub="Health centers which experienced an outbreak"
+)
 
-# dry season only in epidemic year 2006
 
 incid_plot(
-    HOUNDA.incid[,fe_fs_houde.index][yearmon(as.yearmon(vtime))>="janv. 2006"&yearmon(as.yearmon(vtime))<="mai 2007"], 
-    main=main.hounde,
-    sub=sub.hounde,
-    ylim=c(0,350)
+    ts.Lena.complete[,non_fe_fs_lena.index][year(vtime)>=2004], 
+    main=main.title("Lena"),
+    sub="Health centers which experienced no outbreak"
 )
 
 dev.off()
 
-#calculation of the median value of weekly pic
-#incidences together with min and max incidence during the dry season.
+#====
+
+## K.Vigue
+
+pdf(file='plots/fe_et_non_fe_k.vigue_2004_2012.pdf',width=15,height=10)
+
+incid_plot(
+    ts.k.vigue.complete[,fe_fs_k.vigue.index][year(vtime)>=2004], 
+    main=main.title("K.Vigue"),
+    sub="Health centers which experienced an outbreak"
+)
 
 
+incid_plot(
+    ts.k.vigue.complete[,non_fe_fs_k.vigue.index][year(vtime)>=2004], 
+    main=main.title("K.Vigue"),
+    sub="Health centers which experienced no outbreak"
+)
+
+dev.off()
+
+##== SEGUENEGA
+
+pdf(file='plots/fe_et_non_fe_seguenega_2004_2012.pdf',width=15,height=10)
+
+incid_plot(
+    SEGUENEGA.incid[,fe_fs_seguenega.index][year(vtime)>=2004], 
+    main=main.title("Séguénéga"),
+    sub="Health centers which experienced an outbreak"
+)
+
+
+incid_plot(
+    SEGUENEGA.incid[,non_fe_fs_seguenega.index][year(vtime)>=2004], 
+    main=main.title("Séguénéga"),
+    sub="Health centers which experienced no outbreak"
+)
+
+dev.off()
+
+##=====================================================================
 
 
 
