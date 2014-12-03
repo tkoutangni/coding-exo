@@ -25,6 +25,184 @@ subset.houde<-as.data.frame( # subseting data data base using a time window
 ## Wet / rainy season: June - October
 #-------------------------------------------
 install.packages("hydroTSM")
+library("hydroTSM")
+
+
+## HOUNDE
+dry.harmattan.hounde=rbind(
+  extract(HOUNDA.incid,trgt=11),
+  extract(HOUNDA.incid,trgt=12),
+  extract(HOUNDA.incid,trgt=1),
+  extract(HOUNDA.incid,trgt=2)
+  )
+
+dry.hot.hounde=rbind(
+  extract(HOUNDA.incid,trgt=3),
+  extract(HOUNDA.incid,trgt=4),
+  extract(HOUNDA.incid,trgt=5)
+)
+
+wet.hounde=rbind(
+  extract(HOUNDA.incid,trgt=6),
+  extract(HOUNDA.incid,trgt=7),
+  extract(HOUNDA.incid,trgt=8),
+  extract(HOUNDA.incid,trgt=9),
+  extract(HOUNDA.incid,trgt=10)
+)
+
+## LENA
+dry.harmattan.lena=rbind(
+  extract(ts.Lena.complete,trgt=11),
+  extract(ts.Lena.complete,trgt=12),
+  extract(ts.Lena.complete,trgt=1),
+  extract(ts.Lena.complete,trgt=2)
+)
+
+dry.hot.lena=rbind(
+  extract(ts.Lena.complete,trgt=3),
+  extract(ts.Lena.complete,trgt=4),
+  extract(ts.Lena.complete,trgt=5)
+)
+
+wet.lena=rbind(
+  extract(ts.Lena.complete,trgt=6),
+  extract(ts.Lena.complete,trgt=7),
+  extract(ts.Lena.complete,trgt=8),
+  extract(ts.Lena.complete,trgt=9),
+  extract(ts.Lena.complete,trgt=10)
+)
+
+## K.vigue
+
+dry.harmattan.k.vigue=rbind(
+  extract(ts.k.vigue.complete,trgt=11),
+  extract(ts.k.vigue.complete,trgt=12),
+  extract(ts.k.vigue.complete,trgt=1),
+  extract(ts.k.vigue.complete,trgt=2)
+)
+
+dry.hot.k.vigue=rbind(
+  extract(ts.k.vigue.complete,trgt=3),
+  extract(ts.k.vigue.complete,trgt=4),
+  extract(ts.k.vigue.complete,trgt=5)
+)
+
+wet.k.vigue=rbind(
+  extract(ts.k.vigue.complete,trgt=6),
+  extract(ts.k.vigue.complete,trgt=7),
+  extract(ts.k.vigue.complete,trgt=8),
+  extract(ts.k.vigue.complete,trgt=9),
+  extract(ts.k.vigue.complete,trgt=10)
+)
+
+## SEGUENEGA
+
+dry.harmattan.seguenega=rbind(
+  extract(SEGUENEGA.incid,trgt=11),
+  extract(SEGUENEGA.incid,trgt=12),
+  extract(SEGUENEGA.incid,trgt=1),
+  extract(SEGUENEGA.incid,trgt=2)
+)
+
+dry.hot.seguenega=rbind(
+  extract(SEGUENEGA.incid,trgt=3),
+  extract(SEGUENEGA.incid,trgt=4),
+  extract(SEGUENEGA.incid,trgt=5)
+)
+
+wet.seguenega=rbind(
+  extract(SEGUENEGA.incid,trgt=6),
+  extract(SEGUENEGA.incid,trgt=7),
+  extract(SEGUENEGA.incid,trgt=8),
+  extract(SEGUENEGA.incid,trgt=9),
+  extract(SEGUENEGA.incid,trgt=10)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+season.func<-function(x){
+  #dry.harmattan<-paste0("dry.harmattan.",district.name)
+  #dry.hot<-paste0("dry.hot.",district.name)
+  #wet<-paste0("wet.",district.name)
+  
+  dry.harmattan=rbind(
+    extract(x,trgt=11),
+    extract(x,trgt=12),
+    extract(x,trgt=1),
+    extract(x,trgt=2)
+  )
+  
+  dry.hot=rbind(
+    extract(x,trgt=3),
+    extract(x,trgt=4),
+    extract(x,trgt=5)
+  )
+  
+  wet=rbind(
+    extract(x,trgt=6),
+    extract(x,trgt=7),
+    extract(x,trgt=8),
+    extract(x,trgt=9),
+    extract(x,trgt=10)
+  )
+  
+#return(cat("season contains:",dim(wet)[1],"observations and",dim(wet)[2],"health centers"))
+#return(cat("season contains:",dim(dry.harmattan)[1],"observations and",dim(dry.harmattan)[2],"health centers"))
+#return(cat("season contains:",dim(dry.hot)[1],"observations and",dim(dry.hot)[2],"health centers"))
+result<-list(wet,dry.harmattan,dry.hot)
+return(result)
+}
+
+season.func(SEGUENEGA.incid,district.name="Seguenega")
+
+dry.harmattan.hounde=rbind(
+  extract(HOUNDA.incid,trgt=11),
+  extract(HOUNDA.incid,trgt=12),
+  extract(HOUNDA.incid,trgt=1),
+  extract(HOUNDA.incid,trgt=2)
+)
+
+dry.hot.hounde=rbind(
+  extract(HOUNDA.incid,trgt=3),
+  extract(HOUNDA.incid,trgt=4),
+  extract(HOUNDA.incid,trgt=5)
+)
+
+wet.hounde=rbind(
+  extract(HOUNDA.incid,trgt=6),
+  extract(HOUNDA.incid,trgt=7),
+  extract(HOUNDA.incid,trgt=8),
+  extract(HOUNDA.incid,trgt=9),
+  extract(HOUNDA.incid,trgt=10)
+)
+
+
+
+
+
+
+
+
 
 
 # Hounde district
