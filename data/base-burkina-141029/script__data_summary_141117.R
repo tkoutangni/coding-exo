@@ -24,8 +24,7 @@ subset.houde<-as.data.frame( # subseting data data base using a time window
 ## Dry season hot (T>=40°C): March - May
 ## Wet / rainy season: June - October
 #-------------------------------------------
-install.packages("hydroTSM")
-library("hydroTSM")
+ 
 
 
 ## HOUNDE
@@ -118,83 +117,205 @@ wet.seguenega=rbind(
   extract(SEGUENEGA.incid,trgt=10)
 )
 
-
 save(list=ls(),file="coding-perso/ws3dec2014.RData")
 
 
+SEGUENEGA.seasons=season.split(SEGUENEGA.incid)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-season.func<-function(x){
-  #dry.harmattan<-paste0("dry.harmattan.",district.name)
-  #dry.hot<-paste0("dry.hot.",district.name)
-  #wet<-paste0("wet.",district.name)
-  
-  dry.harmattan=rbind(
-    extract(x,trgt=11),
-    extract(x,trgt=12),
-    extract(x,trgt=1),
-    extract(x,trgt=2)
-  )
-  
-  dry.hot=rbind(
-    extract(x,trgt=3),
-    extract(x,trgt=4),
-    extract(x,trgt=5)
-  )
-  
-  wet=rbind(
-    extract(x,trgt=6),
-    extract(x,trgt=7),
-    extract(x,trgt=8),
-    extract(x,trgt=9),
-    extract(x,trgt=10)
-  )
-  
-#return(cat("season contains:",dim(wet)[1],"observations and",dim(wet)[2],"health centers"))
-#return(cat("season contains:",dim(dry.harmattan)[1],"observations and",dim(dry.harmattan)[2],"health centers"))
-#return(cat("season contains:",dim(dry.hot)[1],"observations and",dim(dry.hot)[2],"health centers"))
-result<-list(wet,dry.harmattan,dry.hot)
-return(result)
+get.seasons<-function(x){
+    
+    return(list(
+        wet=rbind(
+            extract(x,trgt=6),
+            extract(x,trgt=7),
+            extract(x,trgt=8),
+            extract(x,trgt=9),
+            extract(x,trgt=10)),
+        dry.harmattan=rbind(
+            extract(x,trgt=11),
+            extract(x,trgt=12),
+            extract(x,trgt=1),
+            extract(x,trgt=2)),
+        dry.hot=rbind(
+            extract(x,trgt=3),
+            extract(x,trgt=4),
+            extract(x,trgt=5)
+        )
+        ))
 }
 
-season.func(SEGUENEGA.incid,district.name="Seguenega")
 
-dry.harmattan.hounde=rbind(
-  extract(HOUNDA.incid,trgt=11),
-  extract(HOUNDA.incid,trgt=12),
-  extract(HOUNDA.incid,trgt=1),
-  extract(HOUNDA.incid,trgt=2)
-)
+season.split<-function(x){
+    
+    dry.harmattan=rbind(
+        extract(x,trgt=11),
+        extract(x,trgt=12),
+        extract(x,trgt=1),
+        extract(x,trgt=2)
+    )
+    
+    dry.hot=rbind(
+        extract(x,trgt=3),
+        extract(x,trgt=4),
+        extract(x,trgt=5)
+    )
+    
+    wet=rbind(
+        extract(x,trgt=6),
+        extract(x,trgt=7),
+        extract(x,trgt=8),
+        extract(x,trgt=9),
+        extract(x,trgt=10)
+    )
+    
+    #return(cat("season contains:",dim(wet)[1],"observations and",dim(wet)[2],"health centers"))
+    #return(cat("season contains:",dim(dry.harmattan)[1],"observations and",dim(dry.harmattan)[2],"health centers"))
+    #return(cat("season contains:",dim(dry.hot)[1],"observations and",dim(dry.hot)[2],"health centers"))
+    result<-list(wet,dry.harmattan,dry.hot)
+    return(result)
+}
 
-dry.hot.hounde=rbind(
-  extract(HOUNDA.incid,trgt=3),
-  extract(HOUNDA.incid,trgt=4),
-  extract(HOUNDA.incid,trgt=5)
-)
 
-wet.hounde=rbind(
-  extract(HOUNDA.incid,trgt=6),
-  extract(HOUNDA.incid,trgt=7),
-  extract(HOUNDA.incid,trgt=8),
-  extract(HOUNDA.incid,trgt=9),
-  extract(HOUNDA.incid,trgt=10)
-)
+# calcul valeurs min max et moyenne/mediane incidence par saison et par district
+
+##===================================================
+# Dry harmattan Hounde
+
+## fs avec foyer epidemique
+## Harmattan
+dry.harmattan.hounde_fe<-dry.harmattan.hounde[,fe_fs_houde.index]# health centers with outbreak
+dry.harmattan.hounde_fe_2006<-extract(dry.harmattan.hounde_fe,2006)# removing epidemic year 2006
+
+dry.harmattan.hounde_fe.incid<-cbind(min=sapply(dry.harmattan.hounde_fe*1e+05,function(x) min(x,na.rm=TRUE)),
+                       mean=sapply(dry.harmattan.hounde_fe*1e+05,function(x) mean(x,na.rm=TRUE)),
+                       max=sapply(dry.harmattan.hounde_fe*1e+05,function(x) max(x,na.rm=TRUE)))
+dry.harmattan.hounde_fe.incid
+mean(dry.harmattan.hounde_fe.incid[,1], na.rm=TRUE)
+mean(dry.harmattan.hounde_fe.incid[,2], na.rm=TRUE)
+mean(dry.harmattan.hounde_fe.incid[,3], na.rm=TRUE)
+
+dry.harmattan.hounde_fe_2006.incid<-cbind(min=sapply(dry.harmattan.hounde_fe_2006*1e+05,function(x) min(x,na.rm=TRUE)),
+                                          mean=sapply(dry.harmattan.hounde_fe_2006*1e+05,function(x) mean(x,na.rm=TRUE)),
+                                          max=sapply(dry.harmattan.hounde_fe_2006*1e+05,function(x) max(x,na.rm=TRUE)))
+dry.harmattan.hounde_fe_2006.incid
+mean(dry.harmattan.hounde_fe_2006.incid[,1], na.rm=TRUE)
+mean(dry.harmattan.hounde_fe_2006.incid[,2], na.rm=TRUE)
+mean(dry.harmattan.hounde_fe_2006.incid[,3], na.rm=TRUE)
+
+## Dry hot
+
+dry.hot.hounde_fe<-dry.hot.hounde[,fe_fs_houde.index]# health centers with outbreak
+dry.hot.hounde_fe_2006<-extract(dry.hot.hounde_fe,2006)# removing epidemic year 2006
+
+dry.hot.hounde_fe.incid<-cbind(min=sapply(dry.hot.hounde_fe*1e+05,function(x) min(x,na.rm=TRUE)),
+                                  mean=sapply(dry.hot.hounde_fe*1e+05,function(x) mean(x,na.rm=TRUE)),
+                                  max=sapply(dry.hot.hounde_fe*1e+05,function(x) max(x,na.rm=TRUE)))
+dry.hot.hounde_fe.incid
+mean(dry.hot.hounde_fe.incid[,1], na.rm=TRUE)
+mean(dry.hot.hounde_fe.incid[,2], na.rm=TRUE)
+mean(dry.hot.hounde_fe.incid[,3], na.rm=TRUE)
+
+dry.hot.hounde_fe_2006.incid<-cbind(min=sapply(dry.hot.hounde_fe_2006*1e+05,function(x) min(x,na.rm=TRUE)),
+                                          mean=sapply(dry.hot.hounde_fe_2006*1e+05,function(x) mean(x,na.rm=TRUE)),
+                                          max=sapply(dry.hot.hounde_fe_2006*1e+05,function(x) max(x,na.rm=TRUE)))
+dry.hot.hounde_fe_2006.incid
+mean(dry.hot.hounde_fe_2006.incid[,1], na.rm=TRUE)
+mean(dry.hot.hounde_fe_2006.incid[,2], na.rm=TRUE)
+mean(dry.hot.hounde_fe_2006.incid[,3], na.rm=TRUE)
+
+
+## Wet (hounde)
+
+wet.hounde_fe<-wet.hounde[,fe_fs_houde.index]# health centers with outbreak
+wet.hounde_fe_2006<-extract(wet.hounde_fe,2006)# removing epidemic year 2006
+
+wet.hounde_fe.incid<-cbind(min=sapply(wet.hounde_fe*1e+05,function(x) min(x,na.rm=TRUE)),
+                                  mean=sapply(wet.hounde_fe*1e+05,function(x) mean(x,na.rm=TRUE)),
+                                  max=sapply(wet.hounde_fe*1e+05,function(x) max(x,na.rm=TRUE)))
+
+wet.hounde_fe.incid
+mean(wet.hounde_fe.incid[,1], na.rm=TRUE)
+mean(wet.hounde_fe.incid[,2], na.rm=TRUE)
+mean(wet.hounde_fe.incid[,3], na.rm=TRUE)
+
+wet.hounde_fe_2006.incid<-cbind(min=sapply(wet.hounde_fe_2006*1e+05,function(x) min(x,na.rm=TRUE)),
+                                    mean=sapply(wet.hounde_fe_2006*1e+05,function(x) mean(x,na.rm=TRUE)),
+                                    max=sapply(wet.hounde_fe_2006*1e+05,function(x) max(x,na.rm=TRUE)))
+wet.hounde_fe_2006.incid
+mean(wet.hounde_fe_2006.incid[,1], na.rm=TRUE)
+mean(wet.hounde_fe_2006.incid[,2], na.rm=TRUE)
+mean(wet.hounde_fe_2006.incid[,3], na.rm=TRUE)
+
+
+
+## fs sans foyer epidemique (hounde)
+
+## Harmattan
+dry.harmattan.hounde_non_fe<-dry.harmattan.hounde[,non_fe_fs_houde.index]# health centers with outbreak
+dry.harmattan.hounde_non_fe_2006<-extract(dry.harmattan.hounde_non_fe,2006)# removing epidemic year 2006
+
+dry.harmattan.hounde_non_fe.incid<-cbind(min=sapply(dry.harmattan.hounde_non_fe*1e+05,function(x) min(x,na.rm=TRUE)),
+                                  mean=sapply(dry.harmattan.hounde_non_fe*1e+05,function(x) mean(x,na.rm=TRUE)),
+                                  max=sapply(dry.harmattan.hounde_non_fe*1e+05,function(x) max(x,na.rm=TRUE)))
+dry.harmattan.hounde_non_fe.incid
+mean(dry.harmattan.hounde_non_fe.incid[,1], na.rm=TRUE)
+mean(dry.harmattan.hounde_non_fe.incid[,2], na.rm=TRUE)
+mean(dry.harmattan.hounde_non_fe.incid[,3], na.rm=TRUE)
+
+dry.harmattan.hounde_non_fe_2006.incid<-cbind(min=sapply(dry.harmattan.hounde_non_fe_2006*1e+05,function(x) min(x,na.rm=FALSE)),
+                                          mean=sapply(dry.harmattan.hounde_non_fe_2006*1e+05,function(x) mean(x,na.rm=TRUE)),
+                                          max=sapply(dry.harmattan.hounde_non_fe_2006*1e+05,function(x) max(x,na.rm=FALSE)))
+dry.harmattan.hounde_non_fe_2006.incid
+mean(dry.harmattan.hounde_non_fe_2006.incid[,1], na.rm=TRUE)
+mean(dry.harmattan.hounde_non_fe_2006.incid[,2], na.rm=TRUE)
+mean(dry.harmattan.hounde_non_fe_2006.incid[,3], na.rm=TRUE)
+
+## Dry hot
+
+dry.hot.hounde_non_fe<-dry.hot.hounde[,non_fe_fs_houde.index]# health centers with outbreak
+dry.hot.hounde_non_fe_2006<-extract(dry.hot.hounde_non_fe,2006)# removing epidemic year 2006
+
+dry.hot.hounde_non_fe.incid<-cbind(min=sapply(dry.hot.hounde_non_fe*1e+05,function(x) min(x,na.rm=TRUE)),
+                            mean=sapply(dry.hot.hounde_non_fe*1e+05,function(x) mean(x,na.rm=TRUE)),
+                            max=sapply(dry.hot.hounde_non_fe*1e+05,function(x) max(x,na.rm=TRUE)))
+dry.hot.hounde_non_fe.incid
+mean(dry.hot.hounde_non_fe.incid[,1], na.rm=TRUE)
+mean(dry.hot.hounde_non_fe.incid[,2], na.rm=TRUE)
+mean(dry.hot.hounde_non_fe.incid[,3], na.rm=TRUE)
+
+dry.hot.hounde_non_fe_2006.incid<-cbind(min=sapply(dry.hot.hounde_non_fe_2006*1e+05,function(x) min(x,na.rm=FALSE)),
+                                    mean=sapply(dry.hot.hounde_non_fe_2006*1e+05,function(x) mean(x,na.rm=TRUE)),
+                                    max=sapply(dry.hot.hounde_non_fe_2006*1e+05,function(x) max(x,na.rm=FALSE)))
+dry.hot.hounde_non_fe_2006.incid
+mean(dry.hot.hounde_non_fe_2006.incid[,1], na.rm=TRUE)
+mean(dry.hot.hounde_non_fe_2006.incid[,2], na.rm=TRUE)
+mean(dry.hot.hounde_non_fe_2006.incid[,3], na.rm=TRUE)
+
+
+## Wet (hounde)
+
+wet.hounde_non_fe<-wet.hounde[,non_fe_fs_houde.index]# health centers with outbreak
+wet.hounde_non_fe_2006<-extract(wet.hounde_non_fe,2006)# removing epidemic year 2006
+
+wet.hounde_non_fe.incid<-cbind(min=sapply(wet.hounde_non_fe*1e+05,function(x) min(x,na.rm=TRUE)),
+                        mean=sapply(wet.hounde_non_fe*1e+05,function(x) mean(x,na.rm=TRUE)),
+                        max=sapply(wet.hounde_non_fe*1e+05,function(x) max(x,na.rm=TRUE)))
+
+wet.hounde_non_fe.incid
+mean(wet.hounde_non_fe.incid[,1], na.rm=TRUE)
+mean(wet.hounde_non_fe.incid[,2], na.rm=TRUE)
+mean(wet.hounde_non_fe.incid[,3], na.rm=TRUE)
+
+wet.hounde_non_fe_2006.incid<-cbind(min=sapply(wet.hounde_non_fe_2006*1e+05,function(x) min(x,na.rm=FALSE)),
+                                mean=sapply(wet.hounde_non_fe_2006*1e+05,function(x) mean(x,na.rm=TRUE)),
+                                max=sapply(wet.hounde_non_fe_2006*1e+05,function(x) max(x,na.rm=FALSE)))
+wet.hounde_non_fe_2006.incid
+mean(wet.hounde_non_fe_2006.incid[,1], na.rm=TRUE)
+mean(wet.hounde_non_fe_2006.incid[,2], na.rm=TRUE)
+mean(wet.hounde_non_fe_2006.incid[,3], na.rm=TRUE)
+
+## end of Hounde district estimations 
+##=======================================================================
 
 
 
@@ -203,23 +324,33 @@ wet.hounde=rbind(
 
 
 
+##=================
 
 
-# Hounde district
-v_month<-zoo(month(time(HOUNDA.incid)))
-HOUNDA.incid$season=zoo(HOUNDA.incid$season=0)
-HOUNDA.incid$season[which(v_month==11 | v_month==12 | v_month==1 | v_month==2)]<-HOUNDA.incid$season=="dry harmattan"
-HOUNDA.incid$season[which(v_month==3 | v_month==4 | v_month==5)]<-"dry hot"
-HOUNDA.incid$season[which(v_month==6 | v_month==7 | v_month==8 | v_month==9 | v_month==10)]<-"rainy"
+dry.hot.hounde_fe<-dry.hot.hounde[,fe_fs_houde.index] # health centers with outbreak
+dry.hot.hounde_fe_2006<-extract(dry.hot.hounde_fe,2006) # removing epidemic year 2006
 
-HOUNDA.incid$season[which(v_month==11 | v_month==12 | v_month==1 | v_month==2)]<-1
-HOUNDA.incid$season<-zoo(HOUNDA.incid$season[which(v_month==11 | v_month==12 | v_month==1 | v_month==2)]==1)
+dry.hot.hounde.incid<-cbind(min=sapply(dry.hot.hounde_fe*1e+05,function(x) min(x,na.rm=TRUE)),
+                                  mean=sapply(dry.hot.hounde_fe*1e+05,function(x) mean(x,na.rm=TRUE)),
+                                  max=sapply(dry.hot.hounde_fe*1e+05,function(x) max(x,na.rm=TRUE)))
 
-HOUNDA.incid$season[v_month==11 | v_month==12 | v_month==1 | v_month==2,HOUNDA.incid$season]<-"dry"
-HOUNDA.incid$season[v_month==3 | v_month==4 | v_month==5,HOUNDA.incid$season]<-2
+mean(dry.hot.hounde.incid[,1], na.rm=TRUE)
+mean(dry.hot.hounde.incid[,2], na.rm=TRUE)
+mean(dry.hot.hounde.incid[,3], na.rm=TRUE)
 
-xyplot(HOUNDA.incid[which(HOUNDA.incid[,28]=="dry harmattan"),fe_fs_houde.index])
-xyplot(HOUNDA.incid)
+
+
+test2<-cbind(min=sapply(test*1e+05,function(x) min(x,na.rm=TRUE)),
+                            mean=sapply(test*1e+05,function(x) mean(x,na.rm=TRUE)),
+                            max=sapply(test*1e+05,function(x) max(x,na.rm=TRUE)))
+
+
+
+
+
+
+
+##=================
 
 dry_hounde_fe<-window(
     HOUNDA.incid[,fe_fs_houde.index], 
