@@ -119,7 +119,7 @@ wet.seguenega=rbind(
 )
 
 
-
+save(list=ls(),file="coding-perso/ws3dec2014.RData")
 
 
 
