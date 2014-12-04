@@ -498,12 +498,14 @@ sum(duree.foyer.k.vigue.soumousso)
 index.semaine.foyer.seguenega.goubre<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,1]>=0.00075)
 index.semaine.foyer.seguenega.gounbre<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,2]>=0.00075)
 index.semaine.foyer.seguenega.irim<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,3]>=0.00075)
-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,4]>=0.00075)
-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,5]>=0.00075)
-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,6]>=0.00075)
-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,8]>=0.00075)
+index.semaine.foyer.seguenega.kalsaka<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,4]>=0.00075)
+index.semaine.foyer.seguenega.tangaye<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,5]>=0.00075)
+index.semaine.foyer.seguenega.pourra<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,6]>=0.00075)
+index.semaine.foyer.seguenega.rasma<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,8]>=0.00075)
 
 # calcul des incidences min max et moyenne correspondant au depassement du seuil epidemic des foyers
+
+
 ### exemple pour k.vigue formation sanitaire de soumouso
 coredata(ts.k.vigue.complete[,fe_fs_k.vigue.index])[index.semaine.foyer.k.vigue.soumousso,2] # obtenir les données 
 ### qui correspondent au semaine pendant lesquelles le seuil epidemique est dépassé au niveau formation sanitaire.
@@ -511,32 +513,53 @@ mean(coredata(ts.k.vigue.complete[,fe_fs_k.vigue.index])[index.semaine.foyer.k.v
 min(coredata(ts.k.vigue.complete[,fe_fs_k.vigue.index])[index.semaine.foyer.k.vigue.soumousso,2],na.rm=T)#min
 max(coredata(ts.k.vigue.complete[,fe_fs_k.vigue.index])[index.semaine.foyer.k.vigue.soumousso,2],na.rm=T)#max
 
+index.semaine.foyer.k.vigue.k.vigue
+mean(coredata(ts.k.vigue.complete[,fe_fs_k.vigue.index])[index.semaine.foyer.k.vigue.k.vigue,1],na.rm=T)*1e+05#moyenne
+index.semaine.foyer.k.vigue.soumousso
+mean(coredata(ts.k.vigue.complete[,fe_fs_k.vigue.index])[index.semaine.foyer.k.vigue.soumousso,2],na.rm=T)*1e+05#moyenne
+
+
 ## HOUNDE:
 index.semaine.foyer.hounde.basse
 mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.basse,1])*1e+05 # obtenir les données 
+min(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.basse,1])*1e+05 # obtenir les données 
+max(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.basse,1])*1e+05 # obtenir les données 
 
 index.semaine.foyer.hounde.bohokari
 coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.bohokari,2]*1e+05 # obtenir les données 
 mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.bohokari,2][3:5])*1e+05
+min(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.bohokari,2][3:5])*1e+05
+max(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.bohokari,2][3:5])*1e+05
 
 
 index.semaine.foyer.hounde.bouahoun
 mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.bouere,3])*1e+05 # obtenir les données 
+min(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.bouere,3])*1e+05 # obtenir les données 
+max(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.bouere,3])*1e+05 # obtenir les données 
 
 
 index.semaine.foyer.hounde.dougoumanto
 mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.dougoumanto,4])*1e+05 # obtenir les données 
+min(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.dougoumanto,4])*1e+05 # obtenir les données 
+max(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.dougoumanto,4])*1e+05 # obtenir les données 
 
 
 index.semaine.foyer.hounde.fafo
 # can not compute because no consecutive week after treashold was crossed
 index.semaine.foyer.hounde.koumbia
 mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.koumbia,7][1:5])*1e+05
+min(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.koumbia,7][1:5])*1e+05
+max(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.koumbia,7][1:5])*1e+05
 
 index.semaine.foyer.hounde.sara
 mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.sara,8])*1e+05 # obtenir les données 
+min(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.sara,8])*1e+05 # obtenir les données 
+max(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.sara,8])*1e+05 # obtenir les données 
 
-(146.17+300.93+150.16+176.32+98.75+161.84)/6
+(146.17+300.93+150.16+176.32+98.75+161.84)/6 # moyenne des moyennes
+(97.44+225.70+118.54+40.69+75.96+119.88)/6 # moyenne des minima
+(194.89+338.55+189.67+325.52+132.93+239.77)/6 # moyenne des maxima
+
 
 ## LENA
 
@@ -544,6 +567,49 @@ index.semaine.foyer.lena.dorossiamasso
 mean(coredata(ts.Lena.complete[,fe_fs_lena.index])[index.semaine.foyer.lena.dorossiamasso,1][1:8])*1e+05 # obtenir les données 
 
 index.semaine.foyer.lena.fina
+mean(coredata(ts.Lena.complete[,fe_fs_lena.index])[index.semaine.foyer.lena.fina,2])*1e+05 # obtenir les données 
+
 index.semaine.foyer.lena.kofila
+mean(coredata(ts.Lena.complete[,fe_fs_lena.index])[index.semaine.foyer.lena.kofila,3][1:8])*1e+05 # obtenir les données 
+
 index.semaine.foyer.lena.lena
+mean(coredata(ts.Lena.complete[,fe_fs_lena.index])[index.semaine.foyer.lena.lena,4])*1e+05 # obtenir les données 
+
 index.semaine.foyer.lena.satiri
+mean(coredata(ts.Lena.complete[,fe_fs_lena.index])[index.semaine.foyer.lena.satiri,5])*1e+05 # obtenir les données 
+
+(877.84+194.98+688.34+283.79+231.12)/5
+## SEGUENEGA
+
+index.semaine.foyer.seguenega.goubre<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,1]>=0.00075)
+index.semaine.foyer.seguenega.gounbre<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,2]>=0.00075)
+index.semaine.foyer.seguenega.irim<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,3]>=0.00075)
+index.semaine.foyer.seguenega.kalsaka<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,4]>=0.00075)
+index.semaine.foyer.seguenega.tangaye<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,5]>=0.00075)
+index.semaine.foyer.seguenega.pourra<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,6]>=0.00075)
+index.semaine.foyer.seguenega.rasma<-which(SEGUENEGA.incid[,fe_fs_seguenega.index][,8]>=0.00075)
+
+
+index.semaine.foyer.seguenega.goubre
+mean(coredata(SEGUENEGA.incid[,fe_fs_seguenega.index])[index.semaine.foyer.seguenega.goubre,1])*1e+05 # obtenir les données 
+
+index.semaine.foyer.seguenega.gounbre
+mean(coredata(SEGUENEGA.incid[,fe_fs_seguenega.index])[index.semaine.foyer.seguenega.goubre,2][1:2])*1e+05 # obtenir les données 
+
+index.semaine.foyer.seguenega.irim[3:5]
+mean(coredata(SEGUENEGA.incid[,fe_fs_seguenega.index])[index.semaine.foyer.seguenega.irim,3][3:5])*1e+05 # obtenir les données 
+
+index.semaine.foyer.seguenega.kalsaka
+mean(coredata(SEGUENEGA.incid[,fe_fs_seguenega.index])[index.semaine.foyer.seguenega.kalsaka,4][1:2])*1e+05 # obtenir les données 
+
+
+index.semaine.foyer.seguenega.tangaye
+mean(coredata(SEGUENEGA.incid[,fe_fs_seguenega.index])[index.semaine.foyer.seguenega.tangaye,5][2:4])*1e+05 # obtenir les données 
+mean(coredata(SEGUENEGA.incid[,fe_fs_seguenega.index])[index.semaine.foyer.seguenega.tangaye,5][6:9])*1e+05 # obtenir les données 
+mean(coredata(SEGUENEGA.incid[,fe_fs_seguenega.index])[index.semaine.foyer.seguenega.tangaye,5][11:13])*1e+05 # obtenir les données 
+
+index.semaine.foyer.seguenega.pourra
+mean(coredata(SEGUENEGA.incid[,fe_fs_seguenega.index])[index.semaine.foyer.seguenega.pourra,6])*1e+05 # obtenir les données 
+
+(124.13+124.47+194.62+133.38+118.70)/5
+
