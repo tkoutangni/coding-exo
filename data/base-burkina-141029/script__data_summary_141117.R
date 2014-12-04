@@ -180,7 +180,8 @@ season.split<-function(x){
 
 ##===================================================
 # Dry harmattan Hounde
-
+install.packages("hydroTSM")
+library("hydroTSM")
 ## fs avec foyer epidemique
 ## Harmattan
 dry.harmattan.hounde_fe<-dry.harmattan.hounde[,fe_fs_houde.index]# health centers with outbreak

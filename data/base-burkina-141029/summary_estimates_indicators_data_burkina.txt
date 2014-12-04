@@ -1,0 +1,117 @@
+
+# HOUDE DISTRICT
+=================================================
+
+# formations sanitaires avec foyer epidemiques
+
+# Dry Harmattan
+##########################################
+# Mean estimations: 
+Min = 0
+Max = 89.93921
+Mean 2.152323
+##########################################
+# estimations per health centers
+
+                    min      mean       max
+csps bassé            0 1.1475659  24.36166
+csps bohokari         0 4.7028508 338.55546
+csps bouahoun         0 0.6406748  24.42119
+csps bouéré           0 1.5740681  38.35503
+csps dougoumanto ii   0 1.7241016  68.73938
+csps fafo             0 3.5264052  77.18361
+csps koumbia          0 2.0661570  75.96449
+csps sara             0 1.8367635  71.93282
+
+
+# Dry Hot
+##########################################
+Mean estimations: 
+Min = 0
+Max = 238.4589
+Mean= 7.548308
+##########################################
+
+                    min     mean      max
+csps bassé            0 7.566420 194.8933
+csps bohokari         0 7.538069 338.5555
+csps bouahoun         0 7.712077 189.6792
+csps bouéré           0 8.354564 325.5268
+csps dougoumanto ii   0 5.407299 247.8055
+csps fafo             0 8.730434 238.4974
+csps koumbia          0 7.186549 132.9378
+csps sara             0 7.891057 239.7761
+
+# Rainy season
+##########################################
+Mean estimations: 
+Min = 0
+Max = 21.32221
+Mean= 0.195841
+##########################################
+
+                    min      mean      max
+csps bassé            0 0.2401411 25.09251
+csps bohokari         0 0.0000000  0.00000
+csps bouahoun         0 0.2099429 20.45237
+csps bouéré           0 0.1257517 12.78501
+csps dougoumanto ii   0 0.1644027 11.80026
+csps fafo             0 0.2164384 21.08515
+csps koumbia          0 0.2404854 28.48668
+csps sara             0 0.3695654 50.87568
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dry Harmattan 2006 (Epidemic year only)
+##########################################
+Mean estimations: 
+Min = 0
+Max = 73.46602
+Mean= 9.101323
+##########################################
+
+# estimations per health centers
+                    min       mean       max
+csps bassé            0  7.1651948  24.36166
+csps bohokari         0 33.1917121 338.55546
+csps bouahoun         0  0.0000000   0.00000
+csps bouéré           0  0.7978597  13.56362
+csps dougoumanto ii   0  2.0823988  23.60052
+csps fafo             0  9.3528377  39.74956
+csps koumbia          0  8.9369983  75.96449
+csps sara             0 11.2835791  71.93282
+
+# Dry Hot (2006)
+##########################################
+Mean estimations: 
+Min = 0
+Max = 238.4589
+Mean= 46.58755
+##########################################
+
+ min     mean      max
+csps bassé            0 44.97538 194.8933
+csps bohokari         0 60.76637 338.5555
+csps bouahoun         0 43.77212 189.6792
+csps bouéré           0 53.21111 325.5268
+csps dougoumanto ii   0 38.12392 247.8055
+csps fafo             0 36.69190 238.4974
+csps koumbia          0 37.98224 132.9378
+csps sara             0 57.17737 239.7761
+
+

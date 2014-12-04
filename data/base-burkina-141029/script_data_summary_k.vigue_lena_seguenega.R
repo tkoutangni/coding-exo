@@ -511,8 +511,39 @@ mean(coredata(ts.k.vigue.complete[,fe_fs_k.vigue.index])[index.semaine.foyer.k.v
 min(coredata(ts.k.vigue.complete[,fe_fs_k.vigue.index])[index.semaine.foyer.k.vigue.soumousso,2],na.rm=T)#min
 max(coredata(ts.k.vigue.complete[,fe_fs_k.vigue.index])[index.semaine.foyer.k.vigue.soumousso,2],na.rm=T)#max
 
+## HOUNDE:
+index.semaine.foyer.hounde.basse
+mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.basse,1])*1e+05 # obtenir les données 
+
+index.semaine.foyer.hounde.bohokari
+coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.bohokari,2]*1e+05 # obtenir les données 
+mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.bohokari,2][3:5])*1e+05
 
 
+index.semaine.foyer.hounde.bouahoun
+mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.bouere,3])*1e+05 # obtenir les données 
 
 
+index.semaine.foyer.hounde.dougoumanto
+mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.dougoumanto,4])*1e+05 # obtenir les données 
 
+
+index.semaine.foyer.hounde.fafo
+# can not compute because no consecutive week after treashold was crossed
+index.semaine.foyer.hounde.koumbia
+mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.koumbia,7][1:5])*1e+05
+
+index.semaine.foyer.hounde.sara
+mean(coredata(HOUNDA.incid[,fe_fs_houde.index])[index.semaine.foyer.hounde.sara,8])*1e+05 # obtenir les données 
+
+(146.17+300.93+150.16+176.32+98.75+161.84)/6
+
+## LENA
+
+index.semaine.foyer.lena.dorossiamasso
+mean(coredata(ts.Lena.complete[,fe_fs_lena.index])[index.semaine.foyer.lena.dorossiamasso,1][1:8])*1e+05 # obtenir les données 
+
+index.semaine.foyer.lena.fina
+index.semaine.foyer.lena.kofila
+index.semaine.foyer.lena.lena
+index.semaine.foyer.lena.satiri
